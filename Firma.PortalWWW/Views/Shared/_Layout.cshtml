@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @*<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Firma.PortalWWW</title>
+
+        <environment include="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/css/site.css" />
+        </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        </environment>*@
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Starter Template - Materialize</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/lib/materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/lib/materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo">Logo</a>
+            <ul class="right hide-on-med-and-down">
+                @*Tu są wszystkie linki*@
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
+                </li>
+                <li>
+                    @Html.ActionLink("O Firmie", "About", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
+                </li>
+                <li>
+                    @Html.ActionLink("Polityka prywatności", "Privacy", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
+                </li>
+                <li>
+                    @Html.ActionLink("Kontakt", "Contact", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
+                </li>
+            </ul>
+
+            <ul id="nav-mobile" class="side-nav">
+                @*linki mobilne*@
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
+                </li>
+                <li>
+                    @Html.ActionLink("O Firmie", "About", "Home") 
+                </li>
+                <li>
+                    @Html.ActionLink("Polityka prywatności", "Privacy", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
+                </li>
+                <li>
+                    @Html.ActionLink("Kontakt", "Contact", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
+                </li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <div class="row center"> @*centrowanie body*@ 
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="section">
+
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center light-blue-text"><i class="material-icons">adb</i></h2>
+                        <h5 class="center">TYTUŁ 1</h5>
+
+                        <p class="light">Nasz tekst.Nasz tekst. Nasz tekst. Nasz tekst. Nasz tekst. Nasz tekst.  </p>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center light-blue-text"><i class="material-icons">airport_shuttle</i></h2>
+                        <h5 class="center">TYTUŁ 2</h5>
+
+                        <p class="light">Nasz tekst. Nasz tekst. Nasz tekst. Nasz tekst.  </p>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center light-blue-text"><i class="material-icons">beach_access</i></h2>
+                        <h5 class="center">TYTUŁ 3</h5>
+
+                        <p class="light"> Nasz tekst. Nasz tekst. Nasz tekst.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br><br>
+    </div>
+
+    <footer class="page-footer orange">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">WSB-NLU</h5>
+                    <p class="grey-text text-lighten-4">Opis firmy opis firmy opis firmy</p>
+
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">LINKI</h5>
+                    <ul>
+                        <li><a class="white-text" href="https://www.wp.pl/"> link wp.pl</a></li>
+                        <li><a class="white-text" href="https://www.onet.pl/"> link onet</a></li>
+                        <li><a class="white-text" href="https://wsb-nlu.clouda.edu.pl">link wsb</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Kontakt</h5>
+                    <ul>
+                        <li><a class="white-text" href="https://www.wp.pl/"> link wp.pl</a></li>
+                        <li><a class="white-text" href="https://www.onet.pl/"> link onet</a></li>
+                        <li><a class="white-text" href="https://wsb-nlu.clouda.edu.pl">link wsb</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Made by WSB - NLU 
+            </div>
+        </div>
+    </footer>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+
+
+    @*<environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>*@
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

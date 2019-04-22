@@ -1,0 +1,42 @@
+﻿@model Firma.Intranet.Models.CMS.Aktualnosc
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Aktualnosc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkTytul)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LinkTytul)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tytul)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tresc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tresc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pozycja)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pozycja)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdAktualnosc">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
