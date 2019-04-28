@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Firma.Intranet.Models;
-using Firma.Intranet.Models.Sklep;
+using Firma.Data;
+using Firma.Data.Sklep;
 
 namespace Firma.Intranet.Controllers
 {
     public class RodzajController : Controller
     {
-        private readonly FirmaIntranetContext _context;
+        private readonly FirmaContext _context;
 
-        public RodzajController(FirmaIntranetContext context)
+        public RodzajController(FirmaContext context)
         {
             _context = context;
         }

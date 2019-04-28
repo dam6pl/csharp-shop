@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Firma.Intranet.Models;
+using Firma.Data;
 
 namespace Firma.Intranet
 {
@@ -36,7 +37,7 @@ namespace Firma.Intranet
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<FirmaIntranetContext>(options =>
+            services.AddDbContext<FirmaContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("FirmaIntranetContext")));
         }
 

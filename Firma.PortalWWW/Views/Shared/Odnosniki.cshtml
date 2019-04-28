@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Firma.Data.CMS.Strona>
+
+<div class="nav-wrapper container">
+    <a id="logo-container" href="#" class="brand-logo">Logo</a>
+    <ul class="right hide-on-med-and-down">
+        @*Tu są wszystkie linki*@
+        @foreach(var item in Model)
+        {
+            <li>
+                @Html.ActionLink(item.LinkTytul, "index", "Home", new { id = item.IdStrony }, null);
+            </li>
+        }
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+        @*linki mobilne*@
+        @foreach (var item in Model)
+        {
+            <li>
+                @Html.ActionLink(item.LinkTytul, "index", "Home", new { id = item.IdStrony }, null);
+            </li>
+        }
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+</div>

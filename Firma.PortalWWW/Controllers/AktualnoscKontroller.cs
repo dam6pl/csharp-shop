@@ -9,11 +9,11 @@ using Firma.Data;
 
 namespace Firma.PortalWWW.Controllers
 {
-    public class HomeController : Controller
+    public class AktualnoscController : Controller
     {
         private readonly FirmaContext _context;
 
-        public HomeController(FirmaContext context)
+        public AktualnoscController(FirmaContext context)
         {
             _context = context;
         }
@@ -34,34 +34,9 @@ namespace Firma.PortalWWW.Controllers
                 ).Take(3).ToArray();
 
             if (id == null)
-                id = _context.Strona.First().IdStrony;
+                id = _context.Aktualnosc.First().IdAktualnosc;
 
-            return View(_context.Strona.Find(id));
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(_context.Aktualnosc.Find(id));
         }
     }
 }

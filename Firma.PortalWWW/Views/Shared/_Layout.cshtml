@@ -27,41 +27,7 @@
 
 <body>
     <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Logo</a>
-            <ul class="right hide-on-med-and-down">
-                @*Tu są wszystkie linki*@
-                <li>
-                    @Html.ActionLink("Home", "Index", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
-                </li>
-                <li>
-                    @Html.ActionLink("O Firmie", "About", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
-                </li>
-                <li>
-                    @Html.ActionLink("Polityka prywatności", "Privacy", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
-                </li>
-                <li>
-                    @Html.ActionLink("Kontakt", "Contact", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
-                </li>
-            </ul>
-
-            <ul id="nav-mobile" class="side-nav">
-                @*linki mobilne*@
-                <li>
-                    @Html.ActionLink("Home", "Index", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
-                </li>
-                <li>
-                    @Html.ActionLink("O Firmie", "About", "Home") 
-                </li>
-                <li>
-                    @Html.ActionLink("Polityka prywatności", "Privacy", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
-                </li>
-                <li>
-                    @Html.ActionLink("Kontakt", "Contact", "Home") @*nazwa linku - nazwa pliku - nazwa foldera*@
-                </li>
-            </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-        </div>
+        @Html.Partial("Odnosniki", (IEnumerable<Firma.Data.CMS.Strona>)ViewBag.ModelStrony)
     </nav>
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
@@ -73,39 +39,7 @@
 
 
     <div class="container">
-        <div class="section">
-
-            <!--   Icon Section   -->
-            <div class="row">
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <h2 class="center light-blue-text"><i class="material-icons">adb</i></h2>
-                        <h5 class="center">TYTUŁ 1</h5>
-
-                        <p class="light">Nasz tekst.Nasz tekst. Nasz tekst. Nasz tekst. Nasz tekst. Nasz tekst.  </p>
-                    </div>
-                </div>
-
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <h2 class="center light-blue-text"><i class="material-icons">airport_shuttle</i></h2>
-                        <h5 class="center">TYTUŁ 2</h5>
-
-                        <p class="light">Nasz tekst. Nasz tekst. Nasz tekst. Nasz tekst.  </p>
-                    </div>
-                </div>
-
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <h2 class="center light-blue-text"><i class="material-icons">beach_access</i></h2>
-                        <h5 class="center">TYTUŁ 3</h5>
-
-                        <p class="light"> Nasz tekst. Nasz tekst. Nasz tekst.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        @Html.Partial("Aktualnosci", (IEnumerable<Firma.Data.CMS.Aktualnosc>)ViewBag.ModelAktualnosci)
         <br><br>
     </div>
 

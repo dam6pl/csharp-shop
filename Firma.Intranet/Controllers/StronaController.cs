@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Firma.Intranet.Models;
-using Firma.Intranet.Models.CMS;
+using Firma.Data;
+using Firma.Data.CMS;
 
 namespace Firma.Intranet.Controllers
 {
     public class StronaController : Controller
     {
-        private readonly FirmaIntranetContext _context;
+        private readonly FirmaContext _context;
 
-        public StronaController(FirmaIntranetContext context)
+        public StronaController(FirmaContext context)
         {
             _context = context;
         }

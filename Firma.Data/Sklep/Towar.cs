@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Firma.Intranet.Models.Sklep
+namespace Firma.Data.Sklep
 {
     public class Towar
     {
