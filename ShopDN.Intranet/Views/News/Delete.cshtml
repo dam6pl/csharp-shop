@@ -1,0 +1,55 @@
+﻿@model ShopDN.Data.Models.CMS.News
+
+@{
+    ViewData["Title"] = "Usuwanie aktualności";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Usuwanie aktualności @Model.Title</h1>
+    <a asp-action="Index" class="btn btn-primary btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span class="text">Wróć do listy</span>
+    </a>
+    <br /><br />
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Szczegóły aktualności</h6>
+        </div>
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Content)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Content)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ImageURL)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ImageURL)
+                </dd>
+            </dl>
+
+            <hr />
+
+            <h3> Jesteś pewien, że chcesz usunąć tą aktualność?</h3>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Usuń" class="btn btn-danger btn-block" />
+            </form>
+        </div>
+    </div>
+</div>

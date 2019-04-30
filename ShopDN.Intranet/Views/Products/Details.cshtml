@@ -1,0 +1,65 @@
+﻿@model ShopDN.Data.Models.Shop.Product
+
+@{
+    ViewData["Title"] = "Szczegóły produktu";
+}
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Szczegóły produktu @Model.Title</h1>
+    <a asp-action="Index" class="btn btn-primary btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span class="text">Wróć do listy</span>
+    </a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-edit"></i>
+        </span>
+        <span class="text">Edytuj produkt</span>
+    </a>
+    <br /><br />
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Szczegóły produktu</h6>
+        </div>
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Content)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Content)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.IdCategory)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.IdCategory)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ImageURL)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ImageURL)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
