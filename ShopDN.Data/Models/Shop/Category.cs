@@ -20,5 +20,14 @@ namespace ShopDN.Data.Models.Shop
         [Column(TypeName = "nvarchar(max)")]
         [Display(Name = "Opis kategorii")]
         public string Content { get; set; }
+
+        [Display(Name = "Kategoria nadrzędna")]
+        public int? IdParentCategory { get; set; }
+
+        [ForeignKey(nameof(IdParentCategory))]
+        public virtual Category ParentCategory { get; set; }
+
+        public virtual ICollection<Category> Categories { get; set; }
+
     }
 }

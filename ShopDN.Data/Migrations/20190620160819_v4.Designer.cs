@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopDN.Data.Models;
 
 namespace ShopDN.Data.Migrations
 {
     [DbContext(typeof(ShopDNContext))]
-    partial class ShopDNContextModelSnapshot : ModelSnapshot
+    [Migration("20190620160819_v4")]
+    partial class v4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,23 +50,6 @@ namespace ShopDN.Data.Migrations
                     b.ToTable("News");
                 });
 
-            modelBuilder.Entity("ShopDN.Data.Models.CMS.Option", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Option");
-                });
-
             modelBuilder.Entity("ShopDN.Data.Models.Shop.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -96,6 +81,8 @@ namespace ShopDN.Data.Migrations
                     b.Property<string>("Author")
                         .IsRequired();
 
+                    b.Property<int?>("CategoryId");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -122,7 +109,7 @@ namespace ShopDN.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCategory");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
                 });
@@ -138,8 +125,7 @@ namespace ShopDN.Data.Migrations
                 {
                     b.HasOne("ShopDN.Data.Models.Shop.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("IdCategory")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoryId");
                 });
 #pragma warning restore 612, 618
         }

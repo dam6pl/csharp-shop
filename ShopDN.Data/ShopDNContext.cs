@@ -20,5 +20,7 @@ namespace ShopDN.Data.Models
         public DbSet<Product> Product { get; set; }
 
         public DbSet<Category> Category { get; set; }
+
+        public DbSet<Option> Option { get; set; }
     }
 }

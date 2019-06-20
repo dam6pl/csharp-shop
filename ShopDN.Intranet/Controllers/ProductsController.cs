@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,7 +23,7 @@ namespace ShopDN.Intranet.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Product.ToListAsync());
+            return View(await _context.Product.Include(prod => prod.Category).ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -40,12 +41,31 @@ namespace ShopDN.Intranet.Controllers
                 return NotFound();
             }
 
+            product.Content = Regex.Replace(product.Content, "<.*?>", String.Empty);
+
             return View(product);
         }
 
         // GET: Products/Create
         public IActionResult Create()
         {
+            var categories = new List<Category>();
+
+            foreach (Category category in _context.Category.Where(cat => cat.ParentCategory == null))
+            {
+                categories.Add(category);
+                categories.AddRange( (
+                         from cat in _context.Category
+                         where cat.IdParentCategory == category.Id
+                         select new Category
+                         {
+                             Id = cat.Id,
+                             Title = " » " + cat.Title
+                         }
+                     ).ToList<Category>() );
+            }
+
+            ViewData["IdCategory"] = new SelectList(categories, "Id", "Title");
             return View();
         }
 
@@ -54,7 +74,7 @@ namespace ShopDN.Intranet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,Price,IdCategory,ImageURL")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Title,Author,Content,Price,PriceEBook,PriceAudiobook,IdCategory,ImageURL,Rating,IsFeatured")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +88,24 @@ namespace ShopDN.Intranet.Controllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var categories = new List<Category>();
+
+            foreach (Category category in _context.Category.Where(cat => cat.ParentCategory == null))
+            {
+                categories.Add(category);
+                categories.AddRange((
+                         from cat in _context.Category
+                         where cat.IdParentCategory == category.Id
+                         select new Category
+                         {
+                             Id = cat.Id,
+                             Title = " » " + cat.Title
+                         }
+                     ).ToList<Category>());
+            }
+
+            ViewData["IdCategory"] = new SelectList(categories, "Id", "Title");
+
             if (id == null)
             {
                 return NotFound();
@@ -78,6 +116,7 @@ namespace ShopDN.Intranet.Controllers
             {
                 return NotFound();
             }
+
             return View(product);
         }
 
@@ -86,7 +125,7 @@ namespace ShopDN.Intranet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,Price,IdCategory,ImageURL")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,Content,Price,PriceEBook,PriceAudiobook,IdCategory,ImageURL,Rating,IsFeatured")] Product product)
         {
             if (id != product.Id)
             {
@@ -130,6 +169,8 @@ namespace ShopDN.Intranet.Controllers
             {
                 return NotFound();
             }
+
+            product.Content = Regex.Replace(product.Content, "<.*?>", String.Empty);
 
             return View(product);
         }

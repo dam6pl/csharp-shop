@@ -1,13 +1,13 @@
-﻿@model ShopDN.Data.Models.Shop.Category
+﻿@model ShopDN.Data.Models.CMS.Option
 
 @{
-    ViewData["Title"] = "Szczegóły kategorii";
+    ViewData["Title"] = "Szczegóły opcji";
 }
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Szczegóły kategorii @Model.Title</h1>
+    <h1 class="h3 mb-2 text-gray-800">Szczegóły opcji @Model.Name</h1>
     <a asp-action="Index" class="btn btn-primary btn-icon-split">
         <span class="icon text-white-50">
             <i class="fas fa-arrow-left"></i>
@@ -18,33 +18,27 @@
         <span class="icon text-white-50">
             <i class="fas fa-edit"></i>
         </span>
-        <span class="text">Edytuj kategorię</span>
+        <span class="text">Edytuj opcję</span>
     </a>
     <br /><br />
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Szczegóły kategorii</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Szczegóły opcji</h6>
         </div>
         <div class="card-body">
             <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayNameFor(model => model.Title)
+                    @Html.DisplayNameFor(model => model.Name)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.Title)
+                    @Html.DisplayFor(model => model.Name)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(model => model.Content)
+                    @Html.DisplayNameFor(model => model.Value)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.Content)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.IdParentCategory)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.ParentCategory.Title)
+                    @Html.DisplayFor(model => model.Value)
                 </dd>
             </dl>
         </div>

@@ -21,8 +21,20 @@ namespace ShopDN.Data.Models.CMS
         [Display(Name = "Treść artykułu")]
         public string Content { get; set; }
 
+        [Required(ErrorMessage = "Wpisz autora artykułu")]
+        [MaxLength(50, ErrorMessage = "Autor moze miec maksymalnie 50 znakow")]
+        [Display(Name = "Autor artykułu")]
+        public string Author { get; set; }
+
         [Required(ErrorMessage = "Wpisz URL obrazka")]
         [Display(Name = "URL obrazka artykułu")]
         public string ImageURL { get; set; }
+
+        [Required(ErrorMessage = "Wpisz datę publikacji")]
+        [Display(Name = "Data publikacji")]
+        public DateTime PublishDate { get; set; }
+
+        [Display(Name = "Wersja robocza")]
+        public Boolean IsDraft { get; set; }
     }
 }

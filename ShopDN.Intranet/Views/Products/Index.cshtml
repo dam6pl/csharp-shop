@@ -29,40 +29,20 @@
                                 @Html.DisplayNameFor(model => model.Title)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Content)
+                                @Html.DisplayNameFor(model => model.Author)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Price)
+                                Cena
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.IdCategory)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.ImageURL)
+                                @Html.DisplayNameFor(model => model.IsFeatured)
                             </th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Title)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Content)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Price)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IdCategory)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ImageURL)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach (var item in Model)
                         {
@@ -71,16 +51,18 @@
                                     @Html.DisplayFor(modelItem => item.Title)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Content)
+                                    @Html.DisplayFor(modelItem => item.Author)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Price)
+                                    Wersja papierowa: @Html.DisplayFor(modelItem => item.Price)<br />
+                                    Wersja ebook: @Html.DisplayFor(modelItem => item.PriceEBook)<br />
+                                    Wersja audiobook: @Html.DisplayFor(modelItem => item.PriceAudiobook)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.IdCategory)
+                                    @Html.DisplayFor(modelItem => item.Category.Title)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ImageURL)
+                                    @(item.IsFeatured ? "Promowany" : "")
                                 </td>
                                 <td>
                                     <a class="btn btn-success btn-circle" asp-action="Edit" asp-route-id="@item.Id">

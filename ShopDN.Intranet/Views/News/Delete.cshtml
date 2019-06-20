@@ -35,10 +35,28 @@
                     @Html.DisplayFor(model => model.Content)
                 </dd>
                 <dt>
+                    @Html.DisplayNameFor(model => model.Author)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Author)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PublishDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PublishDate)
+                </dd>
+                <dt>
                     @Html.DisplayNameFor(model => model.ImageURL)
                 </dt>
                 <dd>
                     @Html.DisplayFor(model => model.ImageURL)
+                </dd>
+                <dt>
+                    Status
+                </dt>
+                <dd>
+                    @(Model.IsDraft ? "Wersja robocza" : "Opublikowany")
                 </dd>
             </dl>
 

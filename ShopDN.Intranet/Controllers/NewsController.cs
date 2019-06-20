@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -40,13 +41,18 @@ namespace ShopDN.Intranet.Controllers
                 return NotFound();
             }
 
+            news.Content = Regex.Replace(news.Content, "<.*?>", String.Empty);
+
             return View(news);
         }
 
         // GET: News/Create
         public IActionResult Create()
         {
-            return View();
+            var news = new News();
+            news.PublishDate = DateTime.Now;
+
+            return View(news);
         }
 
         // POST: News/Create
@@ -54,7 +60,7 @@ namespace ShopDN.Intranet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,ImageURL")] News news)
+        public async Task<IActionResult> Create([Bind("Id,Title,Content,ImageURL,Author,PublishDate,IsDraft")] News news)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +92,7 @@ namespace ShopDN.Intranet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,ImageURL")] News news)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,ImageURL,Author,PublishDate,IsDraft")] News news)
         {
             if (id != news.Id)
             {
@@ -130,6 +136,8 @@ namespace ShopDN.Intranet.Controllers
             {
                 return NotFound();
             }
+
+            news.Content = Regex.Replace(news.Content, "<.*?>", String.Empty);
 
             return View(news);
         }

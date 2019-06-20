@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ShopDN.Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,11 +15,19 @@ namespace ShopDN.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(maxLength: 50, nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdParentCategory = table.Column<int>(nullable: false),
+                    ParentCategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Category_Category_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalTable: "Category",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -29,7 +38,10 @@ namespace ShopDN.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(maxLength: 50, nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageURL = table.Column<string>(nullable: false)
+                    Author = table.Column<string>(maxLength: 50, nullable: false),
+                    ImageURL = table.Column<string>(nullable: false),
+                    PublishDate = table.Column<DateTime>(nullable: false),
+                    IsDraft = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,11 +55,16 @@ namespace ShopDN.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(maxLength: 50, nullable: false),
+                    Author = table.Column<string>(nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(nullable: false),
+                    PriceEBook = table.Column<decimal>(nullable: false),
+                    PriceAudiobook = table.Column<decimal>(nullable: false),
                     IdCategory = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: true),
-                    ImageURL = table.Column<string>(nullable: false)
+                    Rating = table.Column<int>(nullable: false),
+                    ImageURL = table.Column<string>(nullable: false),
+                    IsFeatured = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,6 +76,11 @@ namespace ShopDN.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Category_ParentCategoryId",
+                table: "Category",
+                column: "ParentCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",

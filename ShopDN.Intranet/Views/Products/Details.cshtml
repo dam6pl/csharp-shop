@@ -36,6 +36,12 @@
                     @Html.DisplayFor(model => model.Title)
                 </dd>
                 <dt>
+                    @Html.DisplayNameFor(model => model.Author)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Author)
+                </dd>
+                <dt>
                     @Html.DisplayNameFor(model => model.Content)
                 </dt>
                 <dd>
@@ -48,16 +54,40 @@
                     @Html.DisplayFor(model => model.Price)
                 </dd>
                 <dt>
+                    @Html.DisplayNameFor(model => model.PriceEBook)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PriceEBook)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PriceAudiobook)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PriceAudiobook)
+                </dd>
+                <dt>
                     @Html.DisplayNameFor(model => model.IdCategory)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.IdCategory)
+                    @Html.DisplayFor(model => model.Category.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Rating)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Rating)
                 </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.ImageURL)
                 </dt>
                 <dd>
                     @Html.DisplayFor(model => model.ImageURL)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsFeatured)
+                </dt>
+                <dd>
+                    @(Model.IsFeatured ? "Promowany" : "Nie promowany")
                 </dd>
             </dl>
         </div>

@@ -47,7 +47,8 @@
   });
 
     tinymce.init({
-        selector: '#tinymce'
+        selector: '#tinymce',
+        height: "480px"
     });
 
 })(jQuery); // End of use strict

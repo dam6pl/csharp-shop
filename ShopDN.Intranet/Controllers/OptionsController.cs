@@ -1,31 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopDN.Data.Models;
+using ShopDN.Data.Models.CMS;
 using ShopDN.Data.Models.Shop;
 
 namespace ShopDN.Intranet.Controllers
 {
-    public class CategoriesController : Controller
+    public class OptionsController : Controller
     {
         private readonly ShopDNContext _context;
 
-        public CategoriesController(ShopDNContext context)
+        public OptionsController(ShopDNContext context)
         {
             _context = context;
         }
 
-        // GET: Categories
+        // GET: Options
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Category.Include(cat => cat.ParentCategory).ToListAsync());
+            return View(await _context.Option.ToListAsync());
         }
 
-        // GET: Categories/Details/5
+        // GET: Options/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +35,40 @@ namespace ShopDN.Intranet.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category
-                .Include(cat => cat.ParentCategory)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
+            var option = await _context.Option
+                .FirstOrDefaultAsync(o => o.Id == id);
+            if (option == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(option);
         }
 
-        // GET: Categories/Create
+        // GET: Options/Create
         public IActionResult Create()
         {
-            ViewData["IdParentCategory"] = new SelectList(_context.Category.Where(cat => cat.IdParentCategory == null), "Id", "Title");
-
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Options/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,IdParentCategory")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name,Value")] Option option)
         {
+            option.Name = option.Name.ToLower().Replace(" ", "_");
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                _context.Add(option);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(option);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Options/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,26 +76,23 @@ namespace ShopDN.Intranet.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category.FindAsync(id);
-            if (category == null)
+            var option = await _context.Option.FindAsync(id);
+            if (option == null)
             {
                 return NotFound();
             }
-
-            ViewData["HasChildrenCategory"] = _context.Category.Where(cat => cat.IdParentCategory == id).Count() == 0;
-            ViewData["IdParentCategory"] = new SelectList(await _context.Category.Where(cat => cat.IdParentCategory == null).Where(cat => cat.Id != id).ToListAsync(), "Id", "Title");
-
-            return View(category);
+            
+            return View(option);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Options/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,IdParentCategory")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Value")] Option option)
         {
-            if (id != category.Id)
+            if (id != option.Id)
             {
                 return NotFound();
             }
@@ -104,12 +101,12 @@ namespace ShopDN.Intranet.Controllers
             {
                 try
                 {
-                    _context.Update(category);
+                    _context.Update(option);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.Id))
+                    if (!OptionExists(option.Id))
                     {
                         return NotFound();
                     }
@@ -120,10 +117,10 @@ namespace ShopDN.Intranet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(option);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Options/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,31 +128,30 @@ namespace ShopDN.Intranet.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category
-                .Include(cat => cat.ParentCategory)
+            var option = await _context.Option
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
+            if (option == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(option);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Options/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Category.FindAsync(id);
-            _context.Category.Remove(category);
+            var option = await _context.Option.FindAsync(id);
+            _context.Option.Remove(option);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool OptionExists(int id)
         {
-            return _context.Category.Any(e => e.Id == id);
+            return _context.Option.Any(e => e.Id == id);
         }
     }
 }

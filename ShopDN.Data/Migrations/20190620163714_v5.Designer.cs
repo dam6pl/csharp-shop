@@ -10,8 +10,8 @@ using ShopDN.Data.Models;
 namespace ShopDN.Data.Migrations
 {
     [DbContext(typeof(ShopDNContext))]
-    [Migration("20190430120723_Init")]
-    partial class Init
+    [Migration("20190620163714_v5")]
+    partial class v5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,11 +27,19 @@ namespace ShopDN.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageURL")
                         .IsRequired();
+
+                    b.Property<bool>("IsDraft");
+
+                    b.Property<DateTime>("PublishDate");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -40,6 +48,23 @@ namespace ShopDN.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("News");
+                });
+
+            modelBuilder.Entity("ShopDN.Data.Models.CMS.Option", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Options");
                 });
 
             modelBuilder.Entity("ShopDN.Data.Models.Shop.Category", b =>
@@ -51,11 +76,15 @@ namespace ShopDN.Data.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("IdParentCategory");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdParentCategory");
 
                     b.ToTable("Category");
                 });
@@ -66,7 +95,8 @@ namespace ShopDN.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<string>("Author")
+                        .IsRequired();
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
@@ -76,7 +106,17 @@ namespace ShopDN.Data.Migrations
                     b.Property<string>("ImageURL")
                         .IsRequired();
 
+                    b.Property<bool>("IsFeatured");
+
                     b.Property<decimal>("Price");
+
+                    b.Property<decimal?>("PriceAudiobook")
+                        .IsRequired();
+
+                    b.Property<decimal?>("PriceEBook")
+                        .IsRequired();
+
+                    b.Property<int>("Rating");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -84,16 +124,24 @@ namespace ShopDN.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("IdCategory");
 
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("ShopDN.Data.Models.Shop.Category", b =>
+                {
+                    b.HasOne("ShopDN.Data.Models.Shop.Category", "ParentCategory")
+                        .WithMany("Categories")
+                        .HasForeignKey("IdParentCategory");
                 });
 
             modelBuilder.Entity("ShopDN.Data.Models.Shop.Product", b =>
                 {
                     b.HasOne("ShopDN.Data.Models.Shop.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("IdCategory")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
