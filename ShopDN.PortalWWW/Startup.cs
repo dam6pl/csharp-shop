@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ShopDN.Data.Models;
 
 namespace ShopDN.PortalWWW
 {
@@ -33,6 +35,9 @@ namespace ShopDN.PortalWWW
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<ShopDNContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ShopDNContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +62,10 @@ namespace ShopDN.PortalWWW
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "products",
+                    template: "{controller=Shop}/{action=Index}/{categoryId?}");
             });
         }
     }

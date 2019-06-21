@@ -112,16 +112,16 @@
 		bottom: 6px;
 		position: relative;
 	}
-	.navbar-toggler span{
-		display: block;
-		width: 25px;
-		height: 3px;
-		background: #1641ff;
-		margin: auto;
-		margin-bottom: 4px;
-		transition: all 400ms linear;
-		cursor: pointer;
-	}
+    .navbar-toggler span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background: #4e73df;
+        margin: auto;
+        margin-bottom: 4px;
+        transition: all 400ms linear;
+        cursor: pointer;
+    }
     .navbar .container{
         padding-left: 15px;
         padding-right: 15px;

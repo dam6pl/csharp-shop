@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ShopDN.Data.Models.Shop.Product>
+
+@{
+    ViewData["Title"] = "Sklep";
+}
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content d-md-flex justify-content-between align-items-center">
+                <div class="mb-3 mb-md-0">
+                    <h2>Sklep</h2>
+                    <p>Znajdź produkty dla siebie</p>
+                </div>
+                <div class="page_link">
+                    <a asp-controller="Home" asp-action="Index">Strona główna</a>
+                    <a asp-controller="Shop" asp-action="Index">Sklep</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<!--================Category Product Area =================-->
+<section class="cat_product_area section_gap">
+    <div class="container">
+        <div class="row flex-row-reverse">
+            <div class="col-lg-9">
+                <div class="latest_product_inner">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-product">
+                                    <div class="product-img">
+                                        <img class="card-img"
+                                             src="@item.ImageURL"
+                                             alt="" />
+                                    </div>
+                                    <div class="product-btm">
+                                        <a asp-controller="Shop" asp-action="Details" asp-route-id="@item.Id" class="d-block">
+                                            <h5 class="mb-2">@item.Title</h5>
+                                            <h6>Autor: @item.Author</h6>
+                                        </a>
+                                        <div class="mt-3">
+                                            <span class="mr-4">@item.Price PLN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="left_sidebar_area">
+                    <aside class="left_widgets p_filter_widgets">
+                        <div class="l_w_title">
+                            <h3>@(Context.Request.Query["categoryId"].ToString() == "" ? "Kategorie" : "Podkategorie")</h3>
+                        </div>
+                        <div class="widgets_inner">
+                            @if(Context.Request.Query["categoryId"].ToString() != "")
+                            {
+                                <a asp-controller="Shop" asp-action="Index" asp-route-categoryId="" class="pb-3 d-block">
+                                    <i class="ti-arrow-left"></i> Wróć do wszystkich
+                                </a>
+                            }
+                            <ul class="list">
+
+                                @foreach (var cat in ViewBag.Categories)
+                                {
+                                    <li class="@(Context.Request.Query["categoryId"].ToString() != ""
+                                        && Context.Request.Query["categoryId"].ToString() == cat.Id.ToString() ? "active" : "")">
+                                        <a asp-controller="Shop" asp-action="Index" asp-route-categoryId="@cat.Id">@cat.Title</a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </aside>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Category Product Area =================-->

@@ -2,30 +2,52 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ShopDN.Data.Models;
+using ShopDN.Data.Models.CMS;
 using ShopDN.PortalWWW.Models;
 
 namespace ShopDN.PortalWWW.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ShopDNContext _context;
+
+        public HomeController(ShopDNContext context)
         {
-            return View();
+            _context = context;
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> Index()
         {
-            ViewData["Message"] = "Your application description page.";
+            var items = (
+                    from news in _context.News
+                    where news.IsDraft == false
+                    select new News
+                    {
+                        Id = news.Id,
+                        Author = news.Author,
+                        ImageURL = news.ImageURL,
+                        Title = news.Title,
+                        PublishDate = news.PublishDate,
+                        Content = Regex
+                            .Replace(
+                                Regex.Replace(news.Content, "&.*?;", String.Empty), 
+                                "<.*?>", 
+                                String.Empty
+                            )
+                            .Substring(0, 150) + "..."
+                    }
+                ).OrderByDescending(n => n.Id).Take(3).ToListAsync();
 
-            return View();
+            return View(await items);
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 
