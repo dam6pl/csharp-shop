@@ -34,6 +34,12 @@
     <Reference Include="Microsoft.EntityFrameworkCore">
       <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore\2.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational">
+      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore.relational\2.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.SqlServer">
+      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore.sqlserver\2.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -51,6 +57,15 @@
     <Compile Include="CMS\Aktualnosc.cs" />
     <Compile Include="CMS\Strona.cs" />
     <Compile Include="FirmaContext.cs" />
+    <Compile Include="Migrations\20190609120050_M1.cs" />
+    <Compile Include="Migrations\20190609120050_M1.designer.cs">
+      <DependentUpon>20190609120050_M1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190609153234_M2.cs" />
+    <Compile Include="Migrations\20190609153234_M2.designer.cs">
+      <DependentUpon>20190609153234_M2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\FirmaContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sklep\Rodzaj.cs" />
     <Compile Include="Sklep\Towar.cs" />

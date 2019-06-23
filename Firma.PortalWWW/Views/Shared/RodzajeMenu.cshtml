@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Firma.Data.Sklep.Rodzaj>
+
+<div class="nav-wrapper container">
+    <a id="logo-container" href="#" class="brand-logo">Logo</a>
+    <ul class="right hide-on-med-and-down">
+        @foreach (var item in Model)
+        {
+            <li>
+                @Html.ActionLink(item.Nazwa, "index", "Sklep", new { id = item.IdRodzaju }, null);
+            </li>
+        }
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+        @foreach (var item in Model)
+        {
+        <li>
+            @Html.ActionLink(item.Nazwa, "index", "Sklep", new { id = item.IdRodzaju }, null);
+        </li>
+        }
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+</div>

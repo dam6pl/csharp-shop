@@ -1,29 +1,21 @@
-﻿@model IEnumerable<Firma.Data.CMS.Strona>
+﻿@model IEnumerable<Firma.Data.Sklep.Rodzaj>
 
 <div class="nav-wrapper container">
     <a id="logo-container" href="#" class="brand-logo">Logo</a>
     <ul class="right hide-on-med-and-down">
-        <li>
-            @Html.ActionLink("Sklep", "index", "Sklep");
-        </li>
-        @*Tu są wszystkie linki*@
         @foreach (var item in Model)
         {
             <li>
-                @Html.ActionLink(item.LinkTytul, "index", "Home", new { id = item.IdStrony }, null);
+                @Html.ActionLink(item.Nazwa, "index", "Sklep", new { id = item.IdRodzaju }, null);
             </li>
         }
     </ul>
 
     <ul id="nav-mobile" class="side-nav">
-        <li>
-            @Html.ActionLink("Sklep", "index", "Sklep");
-        </li>
-        @*linki mobilne*@
         @foreach (var item in Model)
         {
             <li>
-                @Html.ActionLink(item.LinkTytul, "index", "Home", new { id = item.IdStrony }, null);
+                @Html.ActionLink(item.Nazwa, "index", "Sklep", new { id = item.IdRodzaju }, null);
             </li>
         }
     </ul>

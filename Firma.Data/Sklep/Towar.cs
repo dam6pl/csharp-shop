@@ -33,6 +33,9 @@ namespace Firma.Data.Sklep
         [Display(Name = "Rodzaj towaru")]
         public int IdRodzaju { get; set; }
 
+        [Display(Name = "Czy na promocja?")]
+        public bool Promocja { get; set; }
+
         public virtual Rodzaj Rodzaj { get; set; }
     }
 }
