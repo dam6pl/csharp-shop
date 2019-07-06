@@ -93,24 +93,11 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Options -->
-            <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Options" ? "active" : "")">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#options" aria-expanded="true" aria-controls="news">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Opcje</span>
+            <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Orders" ? "active" : "")">
+                <a class="nav-link" asp-controller="Orders" asp-action="Index">
+                    <i class="far fa-money-bill-alt"></i>
+                    <span>Zamówienia</span>
                 </a>
-                <div id="options" class="collapse @(ViewContext.RouteData.Values["Controller"].ToString() == "Options" ? "show" : "")"
-                     aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item  @(
-                        ViewContext.RouteData.Values["Controller"].ToString() == "Options"
-                        && ViewContext.RouteData.Values["Action"].ToString() != "Create"
-                        ? "active" : "")" asp-controller="Options" asp-action="Index">Opcje</a>
-                        <a class="collapse-item @(
-                        ViewContext.RouteData.Values["Controller"].ToString() == "Options"
-                        && ViewContext.RouteData.Values["Action"].ToString() == "Create"
-                        ? "active" : "")" asp-controller="Options" asp-action="Create">Nowa opcja</a>
-                    </div>
-                </div>
             </li>
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

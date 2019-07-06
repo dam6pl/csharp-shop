@@ -1,0 +1,65 @@
+﻿@model ShopDN.Data.Models.Shop.Order
+
+@{
+    ViewData["Title"] = "Składanie zamówienia";
+}
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content d-md-flex justify-content-between align-items-center">
+                <div class="mb-3 mb-md-0">
+                    <h2>Składnie zamówienia</h2>
+                    <p>Podaj dane i sfinalizuj zamówienie</p>
+                </div>
+                <div class="page_link">
+                    <a asp-controller="Home" asp-action="Index">Strona główna</a>
+                    <a asp-controller="Shop" asp-action="Index">Sklep</a>
+                    <a asp-controller="Order" asp-action="Create">Zamówienie</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mt-10">
+                <div class="form-group">
+                    <label asp-for="Login" class="control-label"></label>
+                    <input asp-for="Login" class="single-input" />
+                    <span asp-validation-for="Login" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mt-10">
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label">Imię</label>
+                    <input asp-for="FirstName" class="single-input" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mt-10">
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label">Nazwisko</label>
+                    <input asp-for="LastName" class="single-input" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <label asp-for="Address" class="control-label">Adres</label>
+            <div class="input-group-icon">
+                <div class="icon">
+                    <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                </div>
+                <input asp-for="Address" class="single-input" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="main_btn mt-10" style="margin: 20px 0;">Złóż zamówienie</button>
+        </form>
+    </div>
+</section>

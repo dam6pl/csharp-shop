@@ -21,6 +21,10 @@ namespace ShopDN.Data.Models
 
         public DbSet<Category> Category { get; set; }
 
-        public DbSet<Option> Option { get; set; }
+        public DbSet<CartElement> CartElement { get; set; }
+
+        public DbSet<Order> Order { get; set; }
+
+        public DbSet<OrderElement> OrderElement { get; set; }
     }
 }

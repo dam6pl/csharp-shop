@@ -80,6 +80,8 @@
                                 </ul>
                             </div>
                         </div>
+
+                        @await Component.InvokeAsync("CartIconComponent")
                     </div>
                 </nav>
             </div>
@@ -91,56 +93,8 @@
 
 
     <!--================ start footer Area  =================-->
-    <footer class="footer-area section_gap">
+    <footer class="footer-area" style="padding: 30px 0;">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-md-6 single-footer-widget">
-                    <h4>Produkty</h4>
-                    <ul>
-                        <li><a href="#">Managed Website</a></li>
-                        <li><a href="#">Manage Reputation</a></li>
-                        <li><a href="#">Power Tools</a></li>
-                        <li><a href="#">Marketing Service</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 single-footer-widget">
-                    <h4>Szybkie linki</h4>
-                    <ul>
-                        <li><a href="#">Jobs</a></li>
-                        <li><a href="#">Brand Assets</a></li>
-                        <li><a href="#">Investor Relations</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 single-footer-widget">
-                    <h4>Informacje</h4>
-                    <ul>
-                        <li><a href="#">Jobs</a></li>
-                        <li><a href="#">Brand Assets</a></li>
-                        <li><a href="#">Investor Relations</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 single-footer-widget">
-                    <h4>O nas</h4>
-                    <ul>
-                        <li><a href="#">Guides</a></li>
-                        <li><a href="#">Research</a></li>
-                        <li><a href="#">Experts</a></li>
-                        <li><a href="#">Agencies</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-6 single-footer-widget">
-                    <h4>Newsletter</h4>
-                    <div class="form-wrap" id="mc_embed_signup">
-                        <form target="_blank" action="#"
-                              method="get" class="form-inline">
-                            <input class="form-control" name="EMAIL" placeholder="Twój adres email" type="email">
-                            <button class="click-btn btn btn-default">Subskrybuj</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <div class="footer-bottom row align-items-center">
                 <p class="footer-text m-0 col-lg-8 col-md-12">
                     Copyright &copy; 2019 Wszystkie prawa zastrzeżone | Damian Nowak

@@ -1,13 +1,13 @@
-﻿@model ShopDN.Data.Models.CMS.Option
+﻿@model ShopDN.Data.Models.Shop.Order
 
 @{
-    ViewData["Title"] = "Usuwanie opcji";
+    ViewData["Title"] = "Usuwanie zamówienia";
 }
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Usuwanie opcji @Model.Name</h1>
+    <h1 class="h3 mb-2 text-gray-800">Usuwanie zamówienia @Model.Id</h1>
     <a asp-action="Index" class="btn btn-primary btn-icon-split">
         <span class="icon text-white-50">
             <i class="fas fa-arrow-left"></i>
@@ -18,27 +18,33 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Szczegóły opcji</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Szczegóły zamówienia</h6>
         </div>
         <div class="card-body">
             <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayNameFor(model => model.Name)
+                    Data zamówienia
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.Name)
+                    @Html.DisplayFor(model => model.CreatedAt)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(model => model.Value)
+                    Dane zamawiającego
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.Value)
+                    @Model.FirstName @Model.LastName, @Model.Address
+                </dd>
+                <dt>
+                    Suma zamówienia
+                </dt>
+                <dd>
+                    @Model.Sum
                 </dd>
             </dl>
 
             <hr />
 
-            <h3> Jesteś pewien, że chcesz usunąć tą opcje?</h3>
+            <h3> Jesteś pewien, że chcesz usunąć to zamówienie?</h3>
 
             <form asp-action="Delete">
                 <input type="hidden" asp-for="Id" />

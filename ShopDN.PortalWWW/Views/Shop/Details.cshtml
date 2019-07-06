@@ -61,26 +61,18 @@
 
                     <div class="product_count">
                         <label for="qty">Liczba:</label>
-                        <input type="text"
+                        <input type="number"
                                name="qty"
                                id="sst"
-                               maxlength="12"
+                               min="1"
+                               max="10"
+                               step="1"
                                value="1"
-                               title="Quantity:"
+                               title="Liczba:"
                                class="input-text qty" />
-                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                class="increase items-count"
-                                type="button">
-                            <i class="lnr lnr-chevron-up"></i>
-                        </button>
-                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                class="reduced items-count"
-                                type="button">
-                            <i class="lnr lnr-chevron-down"></i>
-                        </button>
                     </div>
                     <div class="card_area">
-                        <a class="main_btn" href="#">Dodaj do koszyka</a>
+                        <a id="atc" class="main_btn" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" asp-route-count="1">Dodaj do koszyka</a>
                         <a class="icon_btn" href="#">
                             <i class="lnr lnr lnr-diamond"></i>
                         </a>
@@ -94,5 +86,12 @@
     </div>
 </div>
 <!--================End Single Product Area =================-->
+
+<script>
+    document.getElementById('sst').addEventListener('input', function () {
+        document.getElementById('atc').href
+            = document.getElementById('atc').href.replace(/.$/, this.value)
+    })
+</script>
 
 @await Component.InvokeAsync("FeaturedProductsComponent")

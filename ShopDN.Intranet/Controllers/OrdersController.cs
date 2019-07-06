@@ -1,33 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopDN.Data.Models;
-using ShopDN.Data.Models.CMS;
 using ShopDN.Data.Models.Shop;
 
 namespace ShopDN.Intranet.Controllers
 {
-    public class OptionsController : Controller
+    public class OrdersController : Controller
     {
         private readonly ShopDNContext _context;
 
-        public OptionsController(ShopDNContext context)
+        public OrdersController(ShopDNContext context)
         {
             _context = context;
         }
 
-        // GET: Options
+        // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Option.ToListAsync());
+            return View(await _context.Order.ToListAsync());
         }
 
-        // GET: Options/Details/5
+        // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,40 +33,40 @@ namespace ShopDN.Intranet.Controllers
                 return NotFound();
             }
 
-            var option = await _context.Option
-                .FirstOrDefaultAsync(o => o.Id == id);
-            if (option == null)
+            var order = await _context.Order.Where(o => o.Id == id)
+                .Include(o => o.OrderElements).ThenInclude(e => e.Product)
+                .FirstOrDefaultAsync(); ;
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(option);
+            return View(order);
         }
 
-        // GET: Options/Create
+        // GET: Orders/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Options/Create
+        // POST: Orders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Value")] Option option)
+        public async Task<IActionResult> Create([Bind("Id,CreatedAt,Login,FirstName,LastName,Address,Sum")] Order order)
         {
-            option.Name = option.Name.ToLower().Replace(" ", "_");
             if (ModelState.IsValid)
             {
-                _context.Add(option);
+                _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(option);
+            return View(order);
         }
 
-        // GET: Options/Edit/5
+        // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +74,22 @@ namespace ShopDN.Intranet.Controllers
                 return NotFound();
             }
 
-            var option = await _context.Option.FindAsync(id);
-            if (option == null)
+            var order = await _context.Order.FindAsync(id);
+            if (order == null)
             {
                 return NotFound();
             }
-            
-            return View(option);
+            return View(order);
         }
 
-        // POST: Options/Edit/5
+        // POST: Orders/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Value")] Option option)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedAt,Login,FirstName,LastName,Address,Sum")] Order order)
         {
-            if (id != option.Id)
+            if (id != order.Id)
             {
                 return NotFound();
             }
@@ -101,12 +98,12 @@ namespace ShopDN.Intranet.Controllers
             {
                 try
                 {
-                    _context.Update(option);
+                    _context.Update(order);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OptionExists(option.Id))
+                    if (!OrderExists(order.Id))
                     {
                         return NotFound();
                     }
@@ -117,10 +114,10 @@ namespace ShopDN.Intranet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(option);
+            return View(order);
         }
 
-        // GET: Options/Delete/5
+        // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -128,30 +125,30 @@ namespace ShopDN.Intranet.Controllers
                 return NotFound();
             }
 
-            var option = await _context.Option
+            var order = await _context.Order
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (option == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(option);
+            return View(order);
         }
 
-        // POST: Options/Delete/5
+        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var option = await _context.Option.FindAsync(id);
-            _context.Option.Remove(option);
+            var order = await _context.Order.FindAsync(id);
+            _context.Order.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OptionExists(int id)
+        private bool OrderExists(int id)
         {
-            return _context.Option.Any(e => e.Id == id);
+            return _context.Order.Any(e => e.Id == id);
         }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopDN.Data.Models;
 
 namespace ShopDN.Data.Migrations
 {
     [DbContext(typeof(ShopDNContext))]
-    partial class ShopDNContextModelSnapshot : ModelSnapshot
+    [Migration("20190706140229_v10")]
+    partial class v10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,6 +48,23 @@ namespace ShopDN.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("News");
+                });
+
+            modelBuilder.Entity("ShopDN.Data.Models.CMS.Option", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Option");
                 });
 
             modelBuilder.Entity("ShopDN.Data.Models.Shop.CartElement", b =>
@@ -199,7 +218,7 @@ namespace ShopDN.Data.Migrations
             modelBuilder.Entity("ShopDN.Data.Models.Shop.OrderElement", b =>
                 {
                     b.HasOne("ShopDN.Data.Models.Shop.Order", "Order")
-                        .WithMany("OrderElements")
+                        .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
 

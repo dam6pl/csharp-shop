@@ -1,0 +1,112 @@
+﻿@model ShopDN.PortalWWW.Models.Shop.CartDetails;
+
+@{
+    ViewData["Title"] = "Koszyk"    ;
+}
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content d-md-flex justify-content-between align-items-center">
+                <div class="mb-3 mb-md-0">
+                    <h2>Koszyk</h2>
+                    <p>Twoje produkty w koszyku</p>
+                </div>
+                <div class="page_link">
+                    <a asp-controller="Home" asp-action="Index">Strona główna</a>
+                    <a asp-controller="Shop" asp-action="Index">Sklep</a>
+                    <a asp-controller="Cart" asp-action="Index">Koszyk</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Produkt</th>
+                            <th scope="col">Cena</th>
+                            <th scope="col">Ilość</th>
+                            <th scope="col">Suma</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.CartElements.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="5">
+                                    <h3>Brak elementów w koszyku</h3>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+
+                            @foreach (var element in Model.CartElements)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img style="height: 100px;" src="@element.Product.ImageURL" alt="" />
+                                            </div>
+                                            <div class="media-body">
+                                                <p>@element.Product.Title</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>@element.Product.Price PLN</h5>
+                                    </td>
+                                    <td>
+                                        <h5>@element.Count</h5>
+                                    </td>
+                                    <td>
+                                        <h5>@((element.Product.Price * element.Count).ToString("0.00")) PLN</h5>
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@element.Product.Id"
+                                            style="color: red;font-weight: bold;font-size: 20px;">❌</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <h5>Suma zamówienia</h5>
+                            </td>
+                            <td colspan="2" style="text-align:right;">
+                                <h5>@(Model.CartSum.ToString("0.00")) PLN</h5>
+                            </td>
+                        </tr>
+                        
+                        <tr class="out_button_area">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="checkout_btn_inner" style="text-align:right;">
+                                    <a class="gray_btn" asp-controller="Shop">Kontynuuj zakupy</a>
+                                    <a class="main_btn" asp-controller="Order" asp-action="Create">Złóż zamówienie</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->

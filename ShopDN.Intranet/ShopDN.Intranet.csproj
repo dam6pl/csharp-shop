@@ -14,19 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Options\Create.cshtml">
+    <Content Update="Views\Orders\Delete.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Options\Delete.cshtml">
+    <Content Update="Views\Orders\Details.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Options\Details.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Views\Options\Edit.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Views\Options\Index.cshtml">
+    <Content Update="Views\Orders\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Shared\_ValidationScriptsPartial.cshtml">

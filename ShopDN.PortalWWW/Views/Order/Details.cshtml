@@ -1,0 +1,73 @@
+﻿@model ShopDN.Data.Models.Shop.Order
+
+@{
+    ViewData["Title"] = "Szczegóły zamówienia";
+}
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content d-md-flex justify-content-between align-items-center">
+                <div class="mb-3 mb-md-0">
+                    <h2>Szczegóły zamówienia</h2>
+                    <p>Informacje o złożonym zamówieniu</p>
+                </div>
+                <div class="page_link">
+                    <a asp-controller="Home" asp-action="Index">Strona główna</a>
+                    <a asp-controller="Shop" asp-action="Index">Sklep</a>
+                    <a asp-controller="Order" asp-action="Details" asp-route-id="@Model.Id">Zamówienie</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="mt-10">
+            <h4 style="display: inline">Data zamówienia: </h4>@Model.CreatedAt
+        </div>
+        <div class="mt-10">
+            <h4 style="display: inline">Login: </h4> @Model.Login
+        </div>
+        <div class="mt-10">
+            <h4 style="display: inline">Imię: </h4> @Model.FirstName
+        </div>
+        <div class="mt-10">
+            <h4 style="display: inline">Nazwisko: </h4> @Model.LastName
+        </div>
+        <div class="mt-10">
+            <h4 style="display: inline">Adres: </h4> @Model.Address
+        </div>
+        <div class="mt-10">
+            <h4 style="display: inline">Suma: </h4> @Model.Sum PLN
+        </div>
+        <div class="table-responsive" style="margin-top: 30px">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Produkt</th>
+                        <th scope="col">Cena</th>
+                        <th scope="col">Ilość</th>
+                        <th scope="col">Suma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @foreach (var element in Model.OrderElements)
+                        {
+                            <td>
+                                @element.Product.Title
+                            </td>
+                            <td>@element.Product.Price PLN</td>
+                            <td>@element.Count </td>
+                            <td>@((@element.Product.Price * element.Count).ToString("0.00")) PLN</td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

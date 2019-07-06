@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopDN.Data.Models;
 
 namespace ShopDN.Data.Migrations
 {
     [DbContext(typeof(ShopDNContext))]
-    partial class ShopDNContextModelSnapshot : ModelSnapshot
+    [Migration("20190706121248_v8")]
+    partial class v8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,6 +48,23 @@ namespace ShopDN.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("News");
+                });
+
+            modelBuilder.Entity("ShopDN.Data.Models.CMS.Option", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Option");
                 });
 
             modelBuilder.Entity("ShopDN.Data.Models.Shop.CartElement", b =>
@@ -89,56 +108,6 @@ namespace ShopDN.Data.Migrations
                     b.HasIndex("IdParentCategory");
 
                     b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("ShopDN.Data.Models.Shop.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .IsRequired();
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired();
-
-                    b.Property<string>("LastName")
-                        .IsRequired();
-
-                    b.Property<string>("Login")
-                        .IsRequired();
-
-                    b.Property<decimal>("Sum");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Order");
-                });
-
-            modelBuilder.Entity("ShopDN.Data.Models.Shop.OrderElement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Count");
-
-                    b.Property<int>("OrderId");
-
-                    b.Property<decimal>("Price");
-
-                    b.Property<int>("ProductId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderElement");
                 });
 
             modelBuilder.Entity("ShopDN.Data.Models.Shop.Product", b =>
@@ -194,19 +163,6 @@ namespace ShopDN.Data.Migrations
                     b.HasOne("ShopDN.Data.Models.Shop.Category", "ParentCategory")
                         .WithMany("Categories")
                         .HasForeignKey("IdParentCategory");
-                });
-
-            modelBuilder.Entity("ShopDN.Data.Models.Shop.OrderElement", b =>
-                {
-                    b.HasOne("ShopDN.Data.Models.Shop.Order", "Order")
-                        .WithMany("OrderElements")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ShopDN.Data.Models.Shop.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ShopDN.Data.Models.Shop.Product", b =>
